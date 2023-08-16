@@ -5,27 +5,35 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "hotel_guests")
+@Table(name = "guests")
 public class HotelGuest {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public long id;
+  private Long id;
 
-  public String name;
+  private String name;
 
   @Column(name = "last_name")
-  public String lastName;
+  private String lastName;
 
   @Column(name = "date_birth")
-  public LocalDate dateBirth;
-  public String nationality;
-  public int cellphone;
+  private LocalDate dateBirth;
+
+  private String nationality;
+  private int phone;
+
+  @ManyToOne
+  @JoinColumn(name = "reservation_id")
+  private HotelReservation reservation;
 
 }
